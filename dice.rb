@@ -13,7 +13,7 @@ BetterErrors::Middleware.allow_ip!('0.0.0.0/0.0.0.0')
 
 
 get("/") do
-  erb(:elephant)
+  erb(:home)
 end
 
 
@@ -41,9 +41,9 @@ get("/dice/2/10") do
 end
 
 get("/dice/1/20") do
-  first_die = rand(1..20)
+  @die = rand(1..20)
 
-  @outcome = "You rolled a #{first_die}."
+  @outcome = "You rolled a #{@die}."
 
   erb(:one_twenty)
 
@@ -61,5 +61,20 @@ get("/dice/5/4") do
   @outcome = "You rolled a #{first_die}, #{second_die}, #{third_die}, #{fourth_die}, and #{fifth_die} for a total of #{sum}."
 
   erb(:five_four)
+
+end
+
+get("/dice/100/6") do
+
+  @rolls = []
+
+  100.times do 
+    die = rand(1..6)
+
+    @rolls.push(die)
+
+  end
+
+  erb(:one_hundred_six)
 
 end
